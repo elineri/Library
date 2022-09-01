@@ -14,7 +14,7 @@ namespace Library.Models
         public DateTime LoanDate { get; set; }
         public DateTime ReturnDate { get; set; }
         public bool IsReturned { get; set; }
-        public List<Book> Books { get; set; }
+        public List<LoanDetail> LoanDetails { get; set; }
         
     }
 }
