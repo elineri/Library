@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,7 +7,7 @@ namespace Library.Models
 {
     public class Loan
     {
-        [Key]
+        [BindNever]
         public int LoanId { get; set; }
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
