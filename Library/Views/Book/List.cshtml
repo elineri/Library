@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Book>
+
+<h1>Books</h1>
+@foreach (var book in Model)
+{
+	<div>
+		<p><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">@book.Title</a></p>
+	</div>
+}
