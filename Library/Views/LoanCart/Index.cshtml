@@ -1,0 +1,26 @@
+﻿@model LoanCartViewModel
+
+<h2>Books to loan</h2>
+
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>Book</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.LoanCart.LoanCartItems)
+		{
+			<tr>
+				<td>
+					@item.Book.Title
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+<div class="text-center">
+	<a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="ClearCart">Clear Cart</a>
+	<a class="btn btn-primary" asp-controller="Order" asp-action="Checkout">Checkout</a>
+</div>

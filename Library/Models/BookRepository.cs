@@ -15,7 +15,7 @@ namespace Library.Models
         {
             get
             {
-                return _context.Books;
+                return _context.Books.OrderBy(a => a.Author);
             }
         }
 

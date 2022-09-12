@@ -3,7 +3,14 @@
 <h1>Books</h1>
 @foreach (var book in Model)
 {
-	<div>
-		<p><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">@book.Title</a></p>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-6 col-md-4">
+				<p><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">@book.Title</a></p>
+			</div>
+			<div class="col-xs-6 col-md-4">
+				<p>@book.Author</p>
+			</div>
+		</div>
 	</div>
 }

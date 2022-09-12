@@ -1,12 +1,22 @@
 ﻿@model Book
 
 <h1>Book information</h1>
-<img src="@Model.ImageUrl" alt="Picture of book cover" />
 
-<div>
-	<h2>@Model.Title</h2>
-	<h3>Author: @Model.Author</h3>
-	<div>
-		@Model.Description
+<div class="container">
+	<div class="row">
+		<div class="col-md-8">
+			<img src="@Model.ImageUrl" alt="Picture of book cover" />
+		</div>
+		<div class="col-md-8">
+			<h2>@Model.Title</h2>
+		</div>
+		<div class="col-md-8">
+			<h3>Author: @Model.Author</h3>
+		</div>
+		<div class="col-md-8">
+			@Model.Description
+		</div>
 	</div>
 </div>
+
+

@@ -12,6 +12,28 @@
 </head>
 <body>
     <header>
+        @*<div class="container">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Library</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="List">Customers</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="List">Books</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="LoanCart" asp-action="List">LoanCart</a>
+                                </li>                        
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>*@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Library</a>
@@ -24,6 +46,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="List">Customers</a>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="List">Books</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="LoanCart" asp-action="Index">LoanCart</a>
                         </li>                        
                     </ul>
                 </div>
@@ -43,6 +66,7 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li><a asp-controller="Customer" asp-action="List">Customers</a></li>
+                            <li><a asp-controller="Book" asp-action="List">Books</a></li>
                         </ul>
                     </div>
                 </div>
