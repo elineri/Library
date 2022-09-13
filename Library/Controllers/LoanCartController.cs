@@ -27,6 +27,17 @@ namespace Library.Controllers
 			return View(loanCartViewModel);
 		}
 
+		public IActionResult AddToLoanCart(int bookId)
+        {
+			var selectedBook = _bookRepository.GetAllBooks.FirstOrDefault(b => b.BookId == bookId);
+
+            if (selectedBook != null)
+            {
+				_loanCart.AddToCart(selectedBook, 1);
+            }
+			return RedirectToAction("Index");
+		}
+
 		public RedirectToActionResult RemoveFromLoanCart(int bookId)
 		{
 			var selectedBook = _bookRepository.GetAllBooks.FirstOrDefault(b => b.BookId == bookId);

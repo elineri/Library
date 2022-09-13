@@ -3,14 +3,27 @@
 <h1>Books</h1>
 @foreach (var book in Model)
 {
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-6 col-md-4">
-				<p><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">@book.Title</a></p>
-			</div>
-			<div class="col-xs-6 col-md-4">
-				<p>@book.Author</p>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 col-md-4">
+                <p><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">@book.Title</a></p>
+            </div>
+            <div class="col-xs-6 col-md-4">
+                <p>@book.Author</p>
+            </div>
+            <div class="addToCart col-xs-6 col-md-4">
+                <p class="button">
+                    <a class="btn btn-primary" asp-controller="LoanCart" asp-action="AddToLoanCart" asp-route-bookId="@book.BookId">Add to loan cart</a>
+                </p>
+            </div>
+        </div>
+    </div>
 }
+
+@*@model BookListViewModel*@
+@*<h1>Books</h1>
+
+    @foreach (var book in Model.Books)
+    {
+        <partial name="Components/_bookCard" model="book" />
+    }*@
