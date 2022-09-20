@@ -1,0 +1,11 @@
+﻿@model Loan
+
+<form asp-controller="Checkout" method="post" class="form-horizontal" role="form">
+    <div asp-validation-summary="All" class="danger"></div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-5">
+            <input type="submit" class="btn btn-primary" value="Complete order" />
+        </div>
+    </div>
+</form>

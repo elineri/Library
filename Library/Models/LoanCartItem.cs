@@ -9,5 +9,7 @@ namespace Library.Models
 		public string LoanCartId { get; set; }
 		public Book Book { get; set; }
 		public int Amount { get; set; }
+		public Customer Customer { get; set; }
+
 	}
 }

@@ -2,13 +2,15 @@
 
 namespace Library.Models
 {
-    public class LoanRepository
+    public class LoanRepository : ILoanRepository
     {
         private readonly LibraryDbContext _libraryDbContext;
+        private readonly LoanCart _loanCart;
 
-        public LoanRepository(LibraryDbContext libraryDbContext)
+        public LoanRepository(LibraryDbContext libraryDbContext, LoanCart loanCart)
         {
             _libraryDbContext = libraryDbContext;
+            _loanCart = loanCart;
         }
 
         public void CreateLoan(Loan loan)
@@ -17,11 +19,20 @@ namespace Library.Models
             _libraryDbContext.Loans.Add(loan);
             _libraryDbContext.SaveChanges();
 
-            var loanDetails = new Loan
+            var loanCartItems = _loanCart.GetLoanCartItems();
+
+            foreach (var loanCartItem in loanCartItems)
             {
-                ReturnDate = loan.LoanDate.AddDays(30),
-                IsReturned = false
-            };
+                var loanDetails = new LoanDetail
+                {
+                    LoanId = loan.LoanId,
+                    BookId = loanCartItem.Book.BookId
+                };
+
+                _libraryDbContext.LoanDetails.Add(loanDetails);
+            }
+
+            _libraryDbContext.SaveChanges();
         }
     }
 }

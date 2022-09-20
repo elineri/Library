@@ -32,6 +32,7 @@ namespace Library
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<LoanCart>(lc => LoanCart.GetCart(lc));
+            services.AddScoped<ILoanRepository, LoanRepository>();
 
             services.AddHttpContextAccessor();
             services.AddSession();
@@ -64,6 +65,8 @@ namespace Library
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages();
             });
         }
     }
