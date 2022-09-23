@@ -1,0 +1,43 @@
+﻿@*@model List<string>
+
+    @foreach (var item in Model)
+    {
+        <p>@item</p>
+    }*@
+
+@model LoanListViewModel
+
+@foreach (var loan in Model.Loans)
+{
+   <div class="container">
+       <div class="row">
+           <div class="col">
+               <p>@loan.Book.Title</p>
+           </div>
+           <div class="col">
+               <p>@loan.LoanDate</p>
+           </div>
+           <div class="col">
+               @if (loan.IsReturned == false)
+               {
+                   <p>Not returned</p>
+               }
+               else
+               {
+                   <p>Returned</p>
+               }
+           </div>
+       </div>
+   </div>
+    @*<p>@loan.Book.Title</p>
+
+    @if (loan.IsReturned == false)
+    {
+        <p>Not returned</p>
+    }
+    else
+    {
+        <p>Returned</p>
+    }*@
+
+}

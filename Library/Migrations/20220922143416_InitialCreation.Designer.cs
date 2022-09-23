@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    [Migration("20220913151412_AddedCategory")]
-    partial class AddedCategory
+    [Migration("20220922143416_InitialCreation")]
+    partial class InitialCreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -174,6 +174,9 @@ namespace Library.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
@@ -183,10 +186,9 @@ namespace Library.Migrations
                     b.Property<DateTime>("LoanDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("ReturnDate")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("LoanId");
+
+                    b.HasIndex("BookId");
 
                     b.HasIndex("CustomerId");
 
@@ -216,28 +218,6 @@ namespace Library.Migrations
                     b.ToTable("LoanCartItems");
                 });
 
-            modelBuilder.Entity("Library.Models.LoanDetail", b =>
-                {
-                    b.Property<int>("LoanDetailId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LoanId")
-                        .HasColumnType("int");
-
-                    b.HasKey("LoanDetailId");
-
-                    b.HasIndex("BookId");
-
-                    b.HasIndex("LoanId");
-
-                    b.ToTable("LoanDetails");
-                });
-
             modelBuilder.Entity("Library.Models.Book", b =>
                 {
                     b.HasOne("Library.Models.Category", "Category")
@@ -247,6 +227,12 @@ namespace Library.Migrations
 
             modelBuilder.Entity("Library.Models.Loan", b =>
                 {
+                    b.HasOne("Library.Models.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Library.Models.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
@@ -259,21 +245,6 @@ namespace Library.Migrations
                     b.HasOne("Library.Models.Book", "Book")
                         .WithMany()
                         .HasForeignKey("BookId");
-                });
-
-            modelBuilder.Entity("Library.Models.LoanDetail", b =>
-                {
-                    b.HasOne("Library.Models.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Library.Models.Loan", "Loan")
-                        .WithMany("LoanDetails")
-                        .HasForeignKey("LoanId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

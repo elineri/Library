@@ -1,29 +1,41 @@
 ﻿@model IEnumerable<Book>
 
-<h1>Books</h1>
-@foreach (var book in Model)
-{
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-6 col-md-4">
-                <p><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">@book.Title</a></p>
-            </div>
-            <div class="col-xs-6 col-md-4">
-                <p>@book.Author</p>
-            </div>
-            <div class="addToCart col-xs-6 col-md-4">
-                <p class="button">
-                    <a class="btn btn-primary" asp-controller="LoanCart" asp-action="AddToLoanCart" asp-route-bookId="@book.BookId">Add to loan cart</a>
-                </p>
-            </div>
-        </div>
+<div class="row">
+    <div class="col-md-16 offset-md-2">
+        <h1>Books</h1>
+        <table class="table">
+            <thead>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Author
+                </th>
+                <th>
+                    
+                </th>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a asp-controller="Book" asp-action="Details" asp-route-id="@item.BookId">@item.Title</a>
+                                
+                        </td>
+                        <td>
+                            @item.Author
+                        </td>
+                        <td>
+                            <div class="addToCart col-xs-12 col-md-12">
+                                <p class="button">
+                                    <a class="btn btn-dark" asp-controller="LoanCart" asp-action="AddToLoanCart" asp-route-bookId="@item.BookId">Add to loan cart</a>
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-}
-
-@*@model BookListViewModel*@
-@*<h1>Books</h1>
-
-    @foreach (var book in Model.Books)
-    {
-        <partial name="Components/_bookCard" model="book" />
-    }*@
+</div>

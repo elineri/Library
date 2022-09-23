@@ -5,60 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Library</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link href="~/lib/twitter-bootstrap3.3.7/css/bootstrap.css" rel="stylesheet"/>
-    <script src="~/lib/twitter-bootstrap3.3.7/js/bootstrap.js"></script>
-    <script src="~/jquery3.4.1/jquery.js"></script>
+    @*<link href="~/lib/twitter-bootstrap3.3.7/css/bootstrap.css" rel="stylesheet"/>
+        <script src="~/lib/twitter-bootstrap3.3.7/js/bootstrap.js"></script>
+        <script src="~/jquery3.4.1/jquery.js"></script>*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
-        @*<div class="container">
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Library</a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                            <ul class="navbar-nav flex-grow-1">
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="List">Customers</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="List">Books</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="LoanCart" asp-action="List">LoanCart</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </div>*@
 
-        @*ORIGINAL*@
-        <!--<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Library</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="List">Customers</a>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="List">Books</a>-->
-                            @*@await Component.InvokeAsync("CategoryMenu")*@
-                            @*<a class="nav-link text-dark" asp-area="" asp-controller="LoanCart" asp-action="Index">LoanCart</a>*@
-                            <!--@await Component.InvokeAsync("LoanCartSummary")
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>-->
-
-        @*TEST START*@
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom box-shadow mb-3" style="background-color:darkseagreen">
+        @*<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom box-shadow mb-3" style="background-color:darkseagreen">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Library</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -76,28 +32,41 @@
                     </ul>
                 </div>
             </div>
+        </nav>*@
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Library</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="List"><i class="fa-solid fa-person"></i> Customers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="List"><i class="fa-solid fa-book"></i> Books</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        @await Component.InvokeAsync("LoanCartSummary")
+                    </li>
+                </ul>
+                
+            </div>
         </nav>
-        @*TEST END*@
-        @*<div class="container">
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li><a asp-controller="Customer" asp-action="List">Customers</a></li>
-                            <li><a asp-controller="Book" asp-action="List">Books</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>*@
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">

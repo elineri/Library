@@ -1,22 +1,41 @@
 ﻿@model Book
 
-<h1>Book information</h1>
+<h1>@Model.Title</h1>
+<h3>Author: @Model.Author</h3>
+
+@*<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <img src="@Model.ImageUrl" alt="Picture of book cover" />
+        </div>
+        <div class="col-md-8">
+            <h3>Author: @Model.Author</h3>
+        </div>
+        <div class="col-md-8">
+            @Model.Description
+        </div>
+        <div class="addToCart col-xs-6 col-md-4">
+            <p class="button">
+                <a class="btn btn-dark" asp-controller="LoanCart" asp-action="AddToLoanCart" asp-route-bookId="@Model.BookId">Add to loan cart</a>
+            </p>
+        </div>
+    </div>
+</div>*@
 
 <div class="container">
-	<div class="row">
-		<div class="col-md-8">
-			<img src="@Model.ImageUrl" alt="Picture of book cover" />
-		</div>
-		<div class="col-md-8">
-			<h2>@Model.Title</h2>
-		</div>
-		<div class="col-md-8">
-			<h3>Author: @Model.Author</h3>
-		</div>
-		<div class="col-md-8">
-			@Model.Description
-		</div>
-	</div>
+    <div class="row">
+        <div class="col">
+            @Model.Description
+        </div>
+        <div class="col">
+            <img src="@Model.ImageUrl" alt="Picture of book cover" />
+        </div>
+    </div>
+    <div class="row">
+        <p class="button">
+            <a class="btn btn-dark" asp-controller="LoanCart" asp-action="AddToLoanCart" asp-route-bookId="@Model.BookId">Add to loan cart</a>
+        </p>
+    </div>
 </div>
 
 

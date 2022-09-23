@@ -4,7 +4,7 @@ namespace Library.Models
 {
     public class LibraryDbContext : DbContext
     {
-        public LibraryDbContext(DbContextOptions<LibraryDbContext> options) :base(options)
+        public LibraryDbContext(DbContextOptions<LibraryDbContext> options) : base(options)
         {
 
         }
@@ -13,7 +13,6 @@ namespace Library.Models
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Loan> Loans { get; set; }
-        public DbSet<LoanDetail> LoanDetails { get; set; }
         public DbSet<LoanCartItem> LoanCartItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -11,16 +11,17 @@ namespace Library.Models
         public int LoanId { get; set; }
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
+
+        public int BookId { get; set; }
+        public Book Book { get; set; }
+
         [Required]
 
         [DataType(DataType.Date)]
         public DateTime LoanDate { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime ReturnDate { get; set; }
-
         public bool IsReturned { get; set; }
-        public List<LoanDetail> LoanDetails { get; set; }
+        //public List<LoanDetail> LoanDetails { get; set; }
         
     }
 }

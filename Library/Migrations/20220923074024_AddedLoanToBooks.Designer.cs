@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    [Migration("20220902075443_AddedValidationAndDescription")]
-    partial class AddedValidationAndDescription
+    [Migration("20220923074024_AddedLoanToBooks")]
+    partial class AddedLoanToBooks
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,7 +32,13 @@ namespace Library.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -40,6 +46,8 @@ namespace Library.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BookId");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Books");
 
@@ -86,6 +94,21 @@ namespace Library.Migrations
                             Author = "J.K. Rowling",
                             Title = "Harry Potter and the Philosopher's stone"
                         });
+                });
+
+            modelBuilder.Entity("Library.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Library.Models.Customer", b =>
@@ -151,6 +174,9 @@ namespace Library.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
@@ -160,40 +186,54 @@ namespace Library.Migrations
                     b.Property<DateTime>("LoanDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("ReturnDate")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("LoanId");
+
+                    b.HasIndex("BookId")
+                        .IsUnique();
 
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Loans");
                 });
 
-            modelBuilder.Entity("Library.Models.LoanDetail", b =>
+            modelBuilder.Entity("Library.Models.LoanCartItem", b =>
                 {
-                    b.Property<int>("LoanDetailId")
+                    b.Property<int>("LoanCartItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BookId")
+                    b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int>("LoanId")
+                    b.Property<int?>("BookId")
                         .HasColumnType("int");
 
-                    b.HasKey("LoanDetailId");
+                    b.Property<string>("LoanCartId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LoanCartItemId");
 
                     b.HasIndex("BookId");
 
-                    b.HasIndex("LoanId");
+                    b.ToTable("LoanCartItems");
+                });
 
-                    b.ToTable("LoanDetails");
+            modelBuilder.Entity("Library.Models.Book", b =>
+                {
+                    b.HasOne("Library.Models.Category", "Category")
+                        .WithMany("Books")
+                        .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("Library.Models.Loan", b =>
                 {
+                    b.HasOne("Library.Models.Book", "Book")
+                        .WithOne("Loan")
+                        .HasForeignKey("Library.Models.Loan", "BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Library.Models.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
@@ -201,19 +241,11 @@ namespace Library.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Library.Models.LoanDetail", b =>
+            modelBuilder.Entity("Library.Models.LoanCartItem", b =>
                 {
                     b.HasOne("Library.Models.Book", "Book")
                         .WithMany()
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Library.Models.Loan", "Loan")
-                        .WithMany("LoanDetails")
-                        .HasForeignKey("LoanId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BookId");
                 });
 #pragma warning restore 612, 618
         }
