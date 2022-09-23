@@ -1,41 +1,32 @@
 ﻿@model Book
 
-<h1>@Model.Title</h1>
-<h3>Author: @Model.Author</h3>
-
-@*<div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <img src="@Model.ImageUrl" alt="Picture of book cover" />
-        </div>
-        <div class="col-md-8">
-            <h3>Author: @Model.Author</h3>
-        </div>
-        <div class="col-md-8">
-            @Model.Description
-        </div>
-        <div class="addToCart col-xs-6 col-md-4">
-            <p class="button">
-                <a class="btn btn-dark" asp-controller="LoanCart" asp-action="AddToLoanCart" asp-route-bookId="@Model.BookId">Add to loan cart</a>
-            </p>
-        </div>
-    </div>
-</div>*@
 
 <div class="container">
     <div class="row">
-        <div class="col">
-            @Model.Description
-        </div>
-        <div class="col">
-            <img src="@Model.ImageUrl" alt="Picture of book cover" />
-        </div>
+        <div class="col" style="padding-bottom: 1em"><h1>@Model.Title</h1></div>
+        
     </div>
     <div class="row">
-        <p class="button">
-            <a class="btn btn-dark" asp-controller="LoanCart" asp-action="AddToLoanCart" asp-route-bookId="@Model.BookId">Add to loan cart</a>
-        </p>
-    </div>
+
+        <div class="col-md-2">            
+            <img class="image" src="@Model.ImageUrl" alt="Picture of book cover" style="max-height: 300px"/>           
+            
+            <p class="button" style="padding-top: 1em">
+                <a class="btn btn-dark" asp-controller="LoanCart" asp-action="AddToLoanCart" asp-route-bookId="@Model.BookId">Add to loan cart</a>
+            </p>
+        </div>
+
+        <div class="col-md-8 offset-1">
+            <div class="col-sm-8">
+                <h4>Author: @Model.Author</h4>
+            </div>
+            <div class="col-sm-8">
+                <p>About this book:</p>
+                @Model.Description
+            </div>
+        </div>
+
+    </div>    
 </div>
 
 
