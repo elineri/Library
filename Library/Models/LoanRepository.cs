@@ -8,34 +8,34 @@ namespace Library.Models
     public class LoanRepository : ILoanRepository
     {
         private readonly LibraryDbContext _libraryDbContext;
-        private readonly LoanCart _loanCart;
+        //private readonly LoanCart _loanCart;
 
-        public LoanRepository(LibraryDbContext libraryDbContext, LoanCart loanCart)
+        public LoanRepository(LibraryDbContext libraryDbContext /*LoanCart loanCart*/)
         {
             _libraryDbContext = libraryDbContext;
-            _loanCart = loanCart;
+            //_loanCart = loanCart;
         }
 
         public void CreateLoan(Loan loan)
         {
-            //loan.LoanDate = DateTime.Now;
-            //_libraryDbContext.Loans.Add(loan);
-            //_libraryDbContext.SaveChanges();
-
+                       
             //var loanCartItems = _loanCart.GetLoanCartItems();
 
             //foreach (var loanCartItem in loanCartItems)
             //{
-            //    var loanDetails = new LoanDetail
+            //    var loanedBook = new Loan
             //    {
             //        LoanId = loan.LoanId,
-            //        BookId = loanCartItem.Book.BookId
+            //        CustomerId = loan.CustomerId,
+            //        BookId = loan.BookId,
+            //        LoanDate = DateTime.Now,
+            //        IsReturned = false
             //    };
 
-            //    _libraryDbContext.LoanDetails.Add(loanDetails);
+            //    _libraryDbContext.Loans.Add(loanedBook);
+            //    _libraryDbContext.SaveChanges();
             //}
 
-            //_libraryDbContext.SaveChanges();
         }
 
 
@@ -49,6 +49,19 @@ namespace Library.Models
 
 
         //    return customerLoanedBooks;
+        //}
+
+        //public void AddBook(Book book)
+        //{
+        //    var selectedBook = _libraryDbContext.Loans.FirstOrDefault(b => b.Book.BookId == book.BookId);
+
+        //    if (selectedBook == null)
+        //    {
+        //        selectedBook = new Loan
+        //        {
+        //            Loa
+        //        }
+        //    }
         //}
     }
 }

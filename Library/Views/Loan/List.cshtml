@@ -1,43 +1,53 @@
-﻿@*@model List<string>
+﻿@model LoanListViewModel
 
-    @foreach (var item in Model)
-    {
-        <p>@item</p>
-    }*@
+<div class="container">
+    <div class="row">
+        <div class="col-md-16 offset-md--2">
+            <h1>Loans</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Loan Date</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
 
-@model LoanListViewModel
-
-@foreach (var loan in Model.Loans)
-{
-   <div class="container">
-       <div class="row">
-           <div class="col">
-               <p>@loan.Book.Title</p>
-           </div>
-           <div class="col">
-               <p>@loan.LoanDate</p>
-           </div>
-           <div class="col">
-               @if (loan.IsReturned == false)
-               {
-                   <p>Not returned</p>
-               }
-               else
-               {
-                   <p>Returned</p>
-               }
-           </div>
-       </div>
-   </div>
-    @*<p>@loan.Book.Title</p>
-
-    @if (loan.IsReturned == false)
-    {
-        <p>Not returned</p>
-    }
-    else
-    {
-        <p>Returned</p>
-    }*@
-
-}
+                <tbody>
+                    @foreach (var loan in Model.Loans)
+                    {
+                    <tr>
+                        <td>
+                            <p>@loan.Book.Title</p>
+                        </td>
+                        <td>
+                            <p>@loan.LoanDate.ToString("dd/MM/yyyy")</p>
+                        </td>
+                        <td>
+                            @if (loan.IsReturned == false)
+                            {
+                                <p>Not returned</p>
+                            }
+                            else
+                            {
+                                <p>Returned</p>
+                            }
+                        </td>
+                        <td>
+                            @if (loan.IsReturned == false)
+                            {
+                                <i class="fa-solid fa-circle" style="color:red"></i>
+                            }
+                            else
+                            {
+                                <i class="fa-solid fa-circle" style="color:green"></i>
+                            }
+                        </td>
+                    </tr>                        
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

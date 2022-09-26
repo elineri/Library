@@ -12,64 +12,126 @@ namespace Library.Controllers
     public class LoanController : Controller
     {
         private readonly ILoanRepository _loanRepository;
-        private readonly LoanCart _loanCart;
         private readonly LibraryDbContext _libraryDbContext;
+        private readonly IBookRepository _bookRepository;
+        private readonly ICustomerRepository _customerRepository;
 
-        public LoanController(ILoanRepository loanRepository, LoanCart loanCart, LibraryDbContext libraryDbContext)
+
+        public LoanController(ILoanRepository loanRepository, LibraryDbContext libraryDbContext, IBookRepository bookRepository, ICustomerRepository customerRepository)
         {
             _loanRepository = loanRepository;
-            _loanCart = loanCart;
             _libraryDbContext = libraryDbContext;
+            _bookRepository = bookRepository;
+            _customerRepository = customerRepository;
+
+        }
+
+        public IActionResult NewLoan(int bookId)
+        {
+            var selectedBook = _bookRepository.GetBookById(bookId);
+
+            var loan = new Loan
+            {
+                BookId = selectedBook.BookId
+            };
+
+            var newLoanViewModel = new NewLoanViewModel
+            {
+                Customers = _customerRepository.GetAllCustomers,
+                Loan = loan,
+                Book = selectedBook
+            };
+
+            return View(newLoanViewModel); /*RedirectToAction(test);*/
+        }
+
+        [HttpPost]
+        public ViewResult NewLoan(NewLoanViewModel newLoanViewModel)
+        {
+            return View(_customerRepository.GetAllCustomers);
         }
 
         public IActionResult Checkout(Loan loan)
         {
-            _loanCart.LoanCartItems = _loanCart.GetLoanCartItems();
+            //loan.IsReturned = false;
+            //loan.LoanDate = DateTime.Now;
 
-            if (_loanCart.LoanCartItems.Count == 0)
+            var loanedBook = new Loan
             {
-                ModelState.AddModelError("", "You haven't added any books");
-            }
+                CustomerId = loan.CustomerId,
+                BookId = loan.BookId,
+                LoanDate = DateTime.Now,
+                IsReturned = false            
+            };
 
             if (ModelState.IsValid)
             {
-                _loanRepository.CreateLoan(loan);
-                _loanCart.ClearCart();
-
-                return RedirectToAction("CheckoutComplete");
+                //_loanRepository.CreateLoan(loan);
+                //_loanCart.ClearCart();
+                _libraryDbContext.Loans.Add(loanedBook);
+                _libraryDbContext.SaveChanges();
+                //return RedirectToAction("Checkout");
             }
-            return View(loan);
+            return View("CheckoutComplete");
+        }
+
+        public void CreateLoan(Loan loan)
+        {
+            var loanedBook = new Loan
+            {
+                LoanId = loan.LoanId,
+                CustomerId = loan.CustomerId,
+                BookId = loan.BookId,
+                LoanDate = DateTime.Now,
+                IsReturned = false
+            };
+
+            _libraryDbContext.Loans.Add(loanedBook);
+            _libraryDbContext.SaveChanges();
         }
 
         public IActionResult CheckoutComplete()
         {
-            ViewBag.CheckoutCompleteMessage = "Thank you for your loan";
             return View();
+
         }
 
         
-
+        // List of customer loans
         public IActionResult List(int id)
         {
-            //var customerLoans = _loanRepository.GetCustomerLoans(id);
-
-            //var customerLoanedBooks = _loanRepository.GetCustomerLoans(id);
-            var loans = _libraryDbContext.Loans.Include(b => b.Book).Where(c => c.CustomerId == id);
-
-            //var books = (from l in _libraryDbContext.Loans
-            //            join b in _libraryDbContext.Books on l.BookId equals b.BookId
-            //            where l.CustomerId == id
-            //            select b.Title).ToList();
-
-            
+            var loans = _libraryDbContext.Loans.Include(b => b.Book).Where(c => c.CustomerId == id);            
 
             var loanListViewModel = new LoanListViewModel
             {
                 Loans = loans
-                //LoanedBooks = customerLoanedBooks,
-                //Loan = _libraryDbContext.Loans.FirstOrDefault(c => c.CustomerId == id)
             };
             return View(loanListViewModel);
         }
+
+        //public void CreateLoan(Loan loan)
+        //{
+
+        //    var loanCartItems = _loanCart.GetLoanCartItems();
+
+        //    foreach (var loanCartItem in loanCartItems)
+        //    {
+        //        var loanedBook = new Loan
+        //        {
+        //            LoanId = loan.LoanId,
+        //            CustomerId = loan.CustomerId,
+        //            BookId = loan.BookId,
+        //            LoanDate = DateTime.Now,
+        //            IsReturned = false
+        //        };
+
+        //        _libraryDbContext.Loans.Add(loanedBook);
+        //        _libraryDbContext.SaveChanges();
+        //    }
+
+        //}
+
+        
+
     }
 }

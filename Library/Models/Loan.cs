@@ -17,7 +17,8 @@ namespace Library.Models
 
         [Required]
 
-        [DataType(DataType.Date)]
+        //[DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MMM-dd-yy}")]
         public DateTime LoanDate { get; set; }
 
         public bool IsReturned { get; set; }
