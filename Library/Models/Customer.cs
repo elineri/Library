@@ -26,6 +26,5 @@ namespace Library.Models
         [Required(ErrorMessage = "Please enter your address")]
         [Display(Name = "Address")]
         public string Address { get; set; }
-
     }
 }

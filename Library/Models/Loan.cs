@@ -21,8 +21,8 @@ namespace Library.Models
         [DisplayFormat(DataFormatString = "{0:MMM-dd-yy}")]
         public DateTime LoanDate { get; set; }
 
-        public bool IsReturned { get; set; }
-        //public List<LoanDetail> LoanDetails { get; set; }
-        
+        //TODO: Add Return date .AddDays
+
+        public bool IsReturned { get; set; }        
     }
 }

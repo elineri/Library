@@ -31,7 +31,6 @@ namespace Library
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<ILoanRepository, LoanRepository>();
 
             services.AddHttpContextAccessor();
             services.AddSession();
