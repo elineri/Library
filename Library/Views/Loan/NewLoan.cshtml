@@ -1,30 +1,4 @@
-﻿@*@model IEnumerable<Customer>
-
-<form asp-controller="Checkout" method="post" class="form-horizontal" role="form">
-    <div asp-validation-summary="All" class="danger"></div>
-
-    <div class="form-group">
-
-        <h3>Please select your name</h3>
-
-        <label asp-for="CustomerId"></label>
-        <select class="form-control" >
-            <option selected>Select customer</option>
-            @foreach (var customer in Model)
-            {
-
-                <option value="@customer.CustomerId">@customer.FirstName @customer.LastName</option>
-            }
-        </select>
-    </div>
-    
-
-    <div>
-        <a class="btn btn-primary" asp-controller="Loan" asp-action="Checkout">Checkout</a>
-    </div>
-</form>*@
-
-@model NewLoanViewModel
+﻿@model NewLoanViewModel
 
 
     <div class="row">
@@ -35,7 +9,7 @@
             <form asp-controller="NewLoan" method="post" class="form-horizontal" role="form">
                 <div asp-validation-summary="All" class="danger"></div>
 
-                @*<input type="hidden" asp-for="@Model.Loan.BookId" />*@
+                <input type="hidden" asp-for="@Model.Loan.BookId" />
 
                 <div class="form-group">
                     <label>Library Customers</label>
@@ -47,12 +21,10 @@
                         <option value="@customer.CustomerId">@customer.FirstName @customer.LastName</option>
                         }
                     </select>
-                    @*<input asp-for="@Model.Loan.CustomerId" class="form-control" />*@
                 </div>
 
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" asp-controller="Loan" asp-action="Checkout" value="Checkout"/>
-                    @*<a class="btn btn-primary" asp-controller="Loan" asp-action="Checkout"><input type="submit" value="Complete Order" /></a>*@
                 </div>
             </form>
         </div>

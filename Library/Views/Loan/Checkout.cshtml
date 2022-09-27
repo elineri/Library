@@ -1,18 +1,5 @@
 ﻿@model Loan
 
-@*<form asp-controller="Checkout">
-    <div class="form-group">
-        <label for="exampleFormControlSelect1">Example select</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-
-            @foreach (var customer in Model.Customers)
-            {
-                <option>@customer.FirstName @customer.LastName</option>
-            }
-        </select>
-    </div>
-</form>*@
-
 <form asp-controller="Checkout" method="post" class="form-horizontal" role="form">
     <div asp-validation-summary="All" class="danger"></div>
 
@@ -30,13 +17,3 @@
         </div>
     </div>
 </form>
-
-@*<form asp-action="Checkout" method="post" class="form-horizontal" role="form">
-
-    <div asp-validation-summary="All" class="danger">
-        <div class="form-group">
-            <label asp-for="FirstName" class="col-md-2 control-label"></label>
-
-        </div>
-    </div>
-</form>*@

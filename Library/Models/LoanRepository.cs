@@ -16,52 +16,23 @@ namespace Library.Models
             //_loanCart = loanCart;
         }
 
-        public void CreateLoan(Loan loan)
-        {
-                       
-            //var loanCartItems = _loanCart.GetLoanCartItems();
-
-            //foreach (var loanCartItem in loanCartItems)
-            //{
-            //    var loanedBook = new Loan
-            //    {
-            //        LoanId = loan.LoanId,
-            //        CustomerId = loan.CustomerId,
-            //        BookId = loan.BookId,
-            //        LoanDate = DateTime.Now,
-            //        IsReturned = false
-            //    };
-
-            //    _libraryDbContext.Loans.Add(loanedBook);
-            //    _libraryDbContext.SaveChanges();
-            //}
-
-        }
-
-
-        //public List<Book> GetCustomerLoans(int id)
+        //public void CreateLoan(Loan loan)
         //{
-        //    var customerLoanedBooks = (from l in _libraryDbContext.Loans
-        //                        join ld in _libraryDbContext.LoanDetails on l.LoanId equals ld.LoanId
-        //                        join b in _libraryDbContext.Books on ld.BookId equals b.BookId
-        //                        where l.CustomerId == id
-        //                        select b).ToList();
+        //    _libraryDbContext.Loans.Add(loan);
+        //    _libraryDbContext.SaveChanges();
 
-
-        //    return customerLoanedBooks;
-        //}
-
-        //public void AddBook(Book book)
-        //{
-        //    var selectedBook = _libraryDbContext.Loans.FirstOrDefault(b => b.Book.BookId == book.BookId);
-
-        //    if (selectedBook == null)
+        //    var loanDetails = new Loan
         //    {
-        //        selectedBook = new Loan
-        //        {
-        //            Loa
-        //        }
-        //    }
+        //        CustomerId = loan.CustomerId,
+        //        BookId = loan.BookId,
+        //        LoanDate = DateTime.Now,
+        //        IsReturned = false
+        //    };
+
+        //    _libraryDbContext.Loans.Add(loanDetails);
+        //    _libraryDbContext.SaveChanges();
+
         //}
+
     }
 }

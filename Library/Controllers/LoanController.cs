@@ -23,7 +23,6 @@ namespace Library.Controllers
             _libraryDbContext = libraryDbContext;
             _bookRepository = bookRepository;
             _customerRepository = customerRepository;
-
         }
 
         public IActionResult NewLoan(int bookId)
@@ -35,6 +34,9 @@ namespace Library.Controllers
                 BookId = selectedBook.BookId
             };
 
+            //_libraryDbContext.Add(loan);
+            //_libraryDbContext.SaveChanges();
+
             var newLoanViewModel = new NewLoanViewModel
             {
                 Customers = _customerRepository.GetAllCustomers,
@@ -42,7 +44,7 @@ namespace Library.Controllers
                 Book = selectedBook
             };
 
-            return View(newLoanViewModel); /*RedirectToAction(test);*/
+            return View(newLoanViewModel); 
         }
 
         [HttpPost]
@@ -56,39 +58,42 @@ namespace Library.Controllers
             //loan.IsReturned = false;
             //loan.LoanDate = DateTime.Now;
 
-            var loanedBook = new Loan
-            {
-                CustomerId = loan.CustomerId,
-                BookId = loan.BookId,
-                LoanDate = DateTime.Now,
-                IsReturned = false            
-            };
+            loan.IsReturned = false;
+            loan.LoanDate = DateTime.Now;
+
+            //var loanedBook = new Loan
+            //{
+            //    CustomerId = loan.CustomerId,
+            //    BookId = loan.BookId,
+            //    LoanDate = DateTime.Now,
+            //    IsReturned = false            
+            //};
 
             if (ModelState.IsValid)
             {
                 //_loanRepository.CreateLoan(loan);
                 //_loanCart.ClearCart();
-                _libraryDbContext.Loans.Add(loanedBook);
+                _libraryDbContext.Loans.Add(loan);
                 _libraryDbContext.SaveChanges();
                 //return RedirectToAction("Checkout");
             }
             return View("CheckoutComplete");
         }
 
-        public void CreateLoan(Loan loan)
-        {
-            var loanedBook = new Loan
-            {
-                LoanId = loan.LoanId,
-                CustomerId = loan.CustomerId,
-                BookId = loan.BookId,
-                LoanDate = DateTime.Now,
-                IsReturned = false
-            };
+        //public void CreateLoan(Loan loan)
+        //{
+        //    var loanedBook = new Loan
+        //    {
+        //        LoanId = loan.LoanId,
+        //        CustomerId = loan.CustomerId,
+        //        BookId = loan.BookId,
+        //        LoanDate = DateTime.Now,
+        //        IsReturned = false
+        //    };
 
-            _libraryDbContext.Loans.Add(loanedBook);
-            _libraryDbContext.SaveChanges();
-        }
+        //    _libraryDbContext.Loans.Add(loanedBook);
+        //    _libraryDbContext.SaveChanges();
+        //}
 
         public IActionResult CheckoutComplete()
         {

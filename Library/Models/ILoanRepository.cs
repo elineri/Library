@@ -6,6 +6,6 @@ namespace Library.Models
     public interface ILoanRepository
     {
         //IEnumerable<Book> GetCustomerLoans(int id);
-        void CreateLoan(Loan loan);
+        //void CreateLoan(Loan loan);
     }
 }
