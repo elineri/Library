@@ -1,32 +1,32 @@
 ﻿@model NewLoanViewModel
 
+<div class="row">
+    <div class="col-md-16 offset-md-2">
+        
 
-    <div class="row">
-        <div class="col">
+    <h3>Select your name</h3>
 
-            <h3>Select your name</h3>
+        <form asp-controller="NewLoan" method="post" class="form-horizontal" role="form">
+            <div asp-validation-summary="All" class="danger"></div>
 
-            <form asp-controller="NewLoan" method="post" class="form-horizontal" role="form">
-                <div asp-validation-summary="All" class="danger"></div>
+            <input type="hidden" asp-for="@Model.Loan.BookId" />
 
-                <input type="hidden" asp-for="@Model.Loan.BookId" />
-
-                <div class="form-group">
-                    <label>Library Customers</label>
-                    <select asp-for="@Model.Loan.CustomerId" class="form-control">
-                        <option selected disabled>Select customer</option>
-                        @foreach (var customer in Model.Customers)
-                        {
+            <div class="form-group">
+                <label>Library Customers</label>
+                <select asp-for="@Model.Loan.CustomerId" class="form-control">
+                    <option selected disabled>Select customer</option>
+                    @foreach (var customer in Model.Customers)
+                    {
 
                         <option value="@customer.CustomerId">@customer.FirstName @customer.LastName</option>
-                        }
-                    </select>
-                </div>
+                    }
+                </select>
+            </div>
 
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary" asp-controller="Loan" asp-action="Checkout" value="Checkout"/>
-                </div>
-            </form>
-        </div>
-        
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" asp-controller="Loan" asp-action="Checkout" value="Checkout" />
+            </div>
+        </form>
     </div>
+
+</div>

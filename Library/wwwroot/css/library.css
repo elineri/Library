@@ -1,0 +1,20 @@
+﻿body {
+    background-color: aliceblue;
+}
+
+a {
+    color:lightslategray;
+}
+
+a:hover {
+    color: steelblue;
+}
+
+#view-btn {
+    background-color: cornflowerblue;
+    border-color: steelblue;
+}
+
+nav {
+    margin-bottom: 2em;
+}

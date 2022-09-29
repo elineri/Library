@@ -15,7 +15,7 @@ namespace Library.Models
         {
             get
             {
-                return _context.Customers;
+                return _context.Customers.OrderBy(n => n.LastName);
             }
         }
 
